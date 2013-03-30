@@ -166,7 +166,10 @@ curl $package -s -o - | tar xzf - -C "${location}"
 
 echo "-----> install icu"
 cd "${location}"
-
+cd icu/source
+./configure
+make
+make install
 
 # download and unpack packages
 echo "-----> Fetching Node.js binaries"
