@@ -155,10 +155,18 @@ SCONS_PACKAGE="http://${S3_BUCKET}.s3.amazonaws.com/scons-${SCONS_VERSION}.tgz"
 VENDORED_NODE="$(mktmpdir node)"
 VENDORED_NPM="$(mktmpdir npm)"
 VENDORED_SCONS="$(mktmpdir scons)"
+VENDORED_ICU="$(mktmpdir icu)"
 
 # install icu
+echo "-----> download icu"
+location=${VENDORED_ICU}
+mkdir -p "${location}"
+package="http://download.icu-project.org/files/icu4c/51.1/icu4c-51_1-src.tgz"
+curl $package -s -o - | tar xzf - -C "${location}"
+
 echo "-----> install icu"
-apt-get install libicu-dev
+cd "${location}"
+
 
 # download and unpack packages
 echo "-----> Fetching Node.js binaries"
